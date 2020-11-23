@@ -2,6 +2,8 @@ var numberCircle = 0;
 var numberCross = 0;
 var nombreTour = 0;
 
+var endGame = false;
+
 let morpion = [0, 0, 0, 0, 0, 0, 0, 0, 0];
 
 
@@ -16,9 +18,14 @@ function ResetGame() {
     document.location.reload();
 }
 
+function play(cell) {
+    if (endGame === false) {
+        placePoint(cell);
+    }
+}
 
 //Ajout d'un cercle ou d'une croix sur la case sélectionner en fonction du jouer 
-function play(cell) {
+function placePoint(cell) {
     //Joueur 1
     if (player === playerlist[0]) {
         document.getElementById("currentPlayerName").innerHTML = playerlist[1];
@@ -26,10 +33,10 @@ function play(cell) {
         if (document.getElementById(cell).childElementCount != 0) {
             alert('Impossible');
         } else {
-            createCircle(cell);
-            numberCircle++;
-            document.getElementById("numberCircle").innerHTML = ' ' + numberCircle;
-            player = playerlist[1];
+                createCircle(cell);
+                numberCircle++;
+                document.getElementById("numberCircle").innerHTML = ' ' + numberCircle;
+                player = playerlist[1];
         }
     }
 
@@ -40,10 +47,10 @@ function play(cell) {
         if (document.getElementById(cell).childElementCount != 0) {
             alert('Impossible');
         } else {
-            createCross(cell);
-            numberCross++;
-            document.getElementById("numberCross").innerHTML = ' ' + numberCross;
-            player = playerlist[0];
+                createCross(cell);
+                numberCross++;
+                document.getElementById("numberCross").innerHTML = ' ' + numberCross;
+                player = playerlist[0];
         }
     }
     checkCircle();
@@ -55,36 +62,44 @@ function checkCircle() {
     //Ligne 1
     if (morpion[0] == 'circle' && morpion[1] == 'circle' && morpion[2] == 'circle') {
         document.getElementById("Vainqueur").innerHTML = playerlist[0];
+        endGame = true;
     }
     //Ligne 2
     if (morpion[3] == 'circle' && morpion[4] == 'circle' && morpion[5] == 'circle') {
         document.getElementById("Vainqueur").innerHTML = playerlist[0];
+        endGame = true;
     }
     //Ligne 3
     if (morpion[6] == 'circle' && morpion[7] == 'circle' && morpion[8] == 'circle') {
         document.getElementById("Vainqueur").innerHTML = playerlist[0];
+        endGame = true;
     }
 
     //Collone 1
     if (morpion[0] == 'circle' && morpion[3] == 'circle' && morpion[6] == 'circle') {
         document.getElementById("Vainqueur").innerHTML = playerlist[0];
+        endGame = true;
     }
     //Collone 2
     if (morpion[1] == 'circle' && morpion[4] == 'circle' && morpion[7] == 'circle') {
         document.getElementById("Vainqueur").innerHTML = playerlist[0];
+        endGame = true;
     }
     //Collone 3
     if (morpion[2] == 'circle' && morpion[5] == 'circle' && morpion[8] == 'circle') {
         document.getElementById("Vainqueur").innerHTML = playerlist[0];
+        endGame = true;
     }
 
     //Diagonale 1
     if (morpion[0] == 'circle' && morpion[4] == 'circle' && morpion[8] == 'circle') {
         document.getElementById("Vainqueur").innerHTML = playerlist[0];
+        endGame = true;
     }
     //Diagonale 2
     if (morpion[2] == 'circle' && morpion[4] == 'circle' && morpion[6] == 'circle') {
         document.getElementById("Vainqueur").innerHTML = playerlist[0];
+        endGame = true;
     }
 }
 
@@ -92,36 +107,44 @@ function checkCross() {
     //Ligne 1
     if (morpion[0] == 'cross' && morpion[1] == 'cross' && morpion[2] == 'cross') {
         document.getElementById("Vainqueur").innerHTML = playerlist[1];
+        endGame = true;
     }
     //Ligne 2
     if (morpion[3] == 'cross' && morpion[4] == 'cross' && morpion[5] == 'cross') {
         document.getElementById("Vainqueur").innerHTML = playerlist[1];
+        endGame = true;
     }
     //Ligne 3
     if (morpion[6] == 'cross' && morpion[7] == 'cross' && morpion[8] == 'cross') {
         document.getElementById("Vainqueur").innerHTML = playerlist[1];
+        endGame = true;
     }
 
     //Collone 1
     if (morpion[0] == 'cross' && morpion[3] == 'cross' && morpion[6] == 'cross') {
         document.getElementById("Vainqueur").innerHTML = playerlist[1];
+        endGame = true;
     }
     //Collone 2
     if (morpion[1] == 'cross' && morpion[4] == 'cross' && morpion[7] == 'cross') {
         document.getElementById("Vainqueur").innerHTML = playerlist[1];
+        endGame = true;
     }
     //Collone 3
     if (morpion[2] == 'cross' && morpion[5] == 'cross' && morpion[8] == 'cross') {
         document.getElementById("Vainqueur").innerHTML = playerlist[1];
+        endGame = true;
     }
 
     //Diagonale 1
     if (morpion[0] == 'cross' && morpion[4] == 'cross' && morpion[8] == 'cross') {
         document.getElementById("Vainqueur").innerHTML = playerlist[1];
+        endGame = true;
     }
     //Diagonale 2
     if (morpion[2] == 'cross' && morpion[4] == 'cross' && morpion[6] == 'cross') {
         document.getElementById("Vainqueur").innerHTML = playerlist[1];
+        endGame = true;
     }
 }
 
@@ -129,6 +152,7 @@ function checkLose() {
     nombreTour++;
     if (nombreTour >= 9) {
         document.getElementById("Vainqueur").innerHTML = ' aucun, recommencez une partie !';
+        endGame = true;
     }
 }
 
@@ -141,6 +165,7 @@ function createCircle(cell) {
     document.getElementById(cell).appendChild(newCircle);
     morpion[cell] = 'circle';
 }
+
 //Function creation de la croix
 function createCross(cell) {
     let newCross = document.createElement('span');
