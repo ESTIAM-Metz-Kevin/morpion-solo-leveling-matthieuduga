@@ -1,5 +1,9 @@
 var numberCircle = 0;
 var numberCross = 0;
+var nombreTour = 0;
+
+let morpion = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+
 
 //Initialisation du jeu
 function StartGame() {
@@ -21,12 +25,10 @@ function play(cell) {
 
         if (document.getElementById(cell).childElementCount != 0) {
             alert('Impossible');
-        }
-
-        else {
+        } else {
             createCircle(cell);
             numberCircle++;
-            document.getElementById("numberCircle").innerHTML = ' ' +numberCircle;
+            document.getElementById("numberCircle").innerHTML = ' ' + numberCircle;
             player = playerlist[1];
         }
     }
@@ -37,45 +39,98 @@ function play(cell) {
 
         if (document.getElementById(cell).childElementCount != 0) {
             alert('Impossible');
-        }
-
-        else {
+        } else {
             createCross(cell);
             numberCross++;
-            document.getElementById("numberCross").innerHTML = ' ' +numberCross;
-            player = playerlist[0]; 
+            document.getElementById("numberCross").innerHTML = ' ' + numberCross;
+            player = playerlist[0];
         }
     }
-    Victoire();
+    checkCircle();
+    checkCross();
+    checkLose();
 }
 
-function Victoire() {
-    var a1 = document.getElementById("1a").childNodes;
-    var b1 = document.getElementById("1b").childNodes;
-    var c1 = document.getElementById("1c").childNodes;
-
-    var a2 = document.getElementById("2a").childNodes;
-    var b2 = document.getElementById("2b").childNodes;
-    var c2 = document.getElementById("2c").childNodes;
-
-    var a3 = document.getElementById("3a").childNodes;
-    var b3 = document.getElementById("3b").childNodes;
-    var c3 = document.getElementById("3c").childNodes;
-
-
-
-    if (a1[0]["className"] === b1[0]["className"] && b1[0]["className"] === c1[0]["className"]) {
-        if (player === playerlist[0]) {
-            alert('Vainqueur ' + playerlist[1]);
-            document.getElementById("Vainqueur").innerHTML = playerlist[1];
-        } else if (player === playerlist[1]) {
-            alert('Vainqueur ' + playerlist[0]);
-            document.getElementById("Vainqueur").innerHTML = playerlist[0];         
-        }
+function checkCircle() {
+    //Ligne 1
+    if (morpion[0] == 'circle' && morpion[1] == 'circle' && morpion[2] == 'circle') {
+        document.getElementById("Vainqueur").innerHTML = playerlist[0];
+    }
+    //Ligne 2
+    if (morpion[3] == 'circle' && morpion[4] == 'circle' && morpion[5] == 'circle') {
+        document.getElementById("Vainqueur").innerHTML = playerlist[0];
+    }
+    //Ligne 3
+    if (morpion[6] == 'circle' && morpion[7] == 'circle' && morpion[8] == 'circle') {
+        document.getElementById("Vainqueur").innerHTML = playerlist[0];
     }
 
+    //Collone 1
+    if (morpion[0] == 'circle' && morpion[3] == 'circle' && morpion[6] == 'circle') {
+        document.getElementById("Vainqueur").innerHTML = playerlist[0];
+    }
+    //Collone 2
+    if (morpion[1] == 'circle' && morpion[4] == 'circle' && morpion[7] == 'circle') {
+        document.getElementById("Vainqueur").innerHTML = playerlist[0];
+    }
+    //Collone 3
+    if (morpion[2] == 'circle' && morpion[5] == 'circle' && morpion[8] == 'circle') {
+        document.getElementById("Vainqueur").innerHTML = playerlist[0];
+    }
+
+    //Diagonale 1
+    if (morpion[0] == 'circle' && morpion[4] == 'circle' && morpion[8] == 'circle') {
+        document.getElementById("Vainqueur").innerHTML = playerlist[0];
+    }
+    //Diagonale 2
+    if (morpion[2] == 'circle' && morpion[4] == 'circle' && morpion[6] == 'circle') {
+        document.getElementById("Vainqueur").innerHTML = playerlist[0];
+    }
 }
 
+function checkCross() {
+    //Ligne 1
+    if (morpion[0] == 'cross' && morpion[1] == 'cross' && morpion[2] == 'cross') {
+        document.getElementById("Vainqueur").innerHTML = playerlist[1];
+    }
+    //Ligne 2
+    if (morpion[3] == 'cross' && morpion[4] == 'cross' && morpion[5] == 'cross') {
+        document.getElementById("Vainqueur").innerHTML = playerlist[1];
+    }
+    //Ligne 3
+    if (morpion[6] == 'cross' && morpion[7] == 'cross' && morpion[8] == 'cross') {
+        document.getElementById("Vainqueur").innerHTML = playerlist[1];
+    }
+
+    //Collone 1
+    if (morpion[0] == 'cross' && morpion[3] == 'cross' && morpion[6] == 'cross') {
+        document.getElementById("Vainqueur").innerHTML = playerlist[1];
+    }
+    //Collone 2
+    if (morpion[1] == 'cross' && morpion[4] == 'cross' && morpion[7] == 'cross') {
+        document.getElementById("Vainqueur").innerHTML = playerlist[1];
+    }
+    //Collone 3
+    if (morpion[2] == 'cross' && morpion[5] == 'cross' && morpion[8] == 'cross') {
+        document.getElementById("Vainqueur").innerHTML = playerlist[1];
+    }
+
+    //Diagonale 1
+    if (morpion[0] == 'cross' && morpion[4] == 'cross' && morpion[8] == 'cross') {
+        document.getElementById("Vainqueur").innerHTML = playerlist[1];
+    }
+    //Diagonale 2
+    if (morpion[2] == 'cross' && morpion[4] == 'cross' && morpion[6] == 'cross') {
+        document.getElementById("Vainqueur").innerHTML = playerlist[1];
+    }
+}
+
+function checkLose() {
+    nombreTour++;
+    if (nombreTour >= 9) {
+        document.getElementById("Vainqueur").innerHTML = ' aucun, recommencez une partie !';
+    }
+}
 
 
 
@@ -84,10 +139,12 @@ function createCircle(cell) {
     let newCircle = document.createElement('span');
     newCircle.setAttribute("class", "circle");
     document.getElementById(cell).appendChild(newCircle);
+    morpion[cell] = 'circle';
 }
 //Function creation de la croix
 function createCross(cell) {
     let newCross = document.createElement('span');
     newCross.setAttribute("class", "cross");
     document.getElementById(cell).appendChild(newCross);
+    morpion[cell] = 'cross';
 }
