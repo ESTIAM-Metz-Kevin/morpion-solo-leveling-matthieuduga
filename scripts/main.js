@@ -33,10 +33,10 @@ function placePoint(cell) {
         if (document.getElementById(cell).childElementCount != 0) {
             alert('Impossible');
         } else {
-                createCircle(cell);
-                numberCircle++;
-                document.getElementById("numberCircle").innerHTML = ' ' + numberCircle;
-                player = playerlist[1];
+            createCircle(cell);
+            numberCircle++;
+            document.getElementById("numberCircle").innerHTML = ' ' + numberCircle;
+            player = playerlist[1];
         }
     }
 
@@ -47,10 +47,10 @@ function placePoint(cell) {
         if (document.getElementById(cell).childElementCount != 0) {
             alert('Impossible');
         } else {
-                createCross(cell);
-                numberCross++;
-                document.getElementById("numberCross").innerHTML = ' ' + numberCross;
-                player = playerlist[0];
+            createCross(cell);
+            numberCross++;
+            document.getElementById("numberCross").innerHTML = ' ' + numberCross;
+            player = playerlist[0];
         }
     }
     checkCircle();
