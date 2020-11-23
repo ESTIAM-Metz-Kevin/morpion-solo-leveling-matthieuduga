@@ -22,6 +22,9 @@ function play(cell) {
     if (endGame === false) {
         placePoint(cell);
     }
+    else {
+        ResetGame();
+    }
 }
 
 //Ajout d'un cercle ou d'une croix sur la case sélectionner en fonction du jouer 
